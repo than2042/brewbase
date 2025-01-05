@@ -17,6 +17,12 @@ export default {
           dark: '#4B2E2A', // Dark roast
         },
       },
+      gap: {
+        '100': '30rem'
+      },
+      skew: {
+        '90': '90deg',
+      }
     },
   },
   plugins: [],
