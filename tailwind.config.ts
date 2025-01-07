@@ -12,9 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         coffee: {
-          light: '#D2B48C', // Light coffee
-          DEFAULT: '#6F4E37', // Coffee brown
-          dark: '#4B2E2A', // Dark roast
+          light: '#D2B48C',
+          DEFAULT: '#6F4E37',
+          dark: '#4B2E2A',
         },
       },
       gap: {
