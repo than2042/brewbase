@@ -7,7 +7,7 @@ interface CoffeeStore {
     fsq_id: string;
     name: string;
     description: string;
-    photos: string[];
+    photos: string;
     location: {
         formatted_address: string;
     };
@@ -43,7 +43,7 @@ const CoffeeStorePage = () => {
                         key={store.fsq_id}
                         name={store.name}
                         description={store.description || "No description available"}
-                        imageURL={store.photos[0] || 'https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_88.png'}
+                        imageURL={store.photos}
                         href={`/store/${store.fsq_id}`}
                         fsq_id={store.fsq_id}
                     />
