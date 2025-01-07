@@ -1,3 +1,4 @@
+
 interface Photo {
     prefix: string;
     suffix: string;
@@ -8,7 +9,7 @@ export const fetchCoffeeShop = async () => {
         method: "GET",
         headers: {
             accept: "application/json",
-            Authorization: 'fsq303gD3PyTKOsjn6yqW0VzNltQ9KjbcCZX/U433g5Lzc4=',
+            Authorization: process.env.FOURSQUARE_API,
         },
     };
 
