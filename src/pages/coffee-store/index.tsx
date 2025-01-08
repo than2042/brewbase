@@ -1,6 +1,8 @@
+'use client'
 import { useState, useEffect } from "react";
 import { fetchCoffeeShop } from "@/api/coffee-shop";
 import Card from "@/components/Card";
+import Loading from "@/app/loading";
 
 // define the TypeScript interface for coffee stores
 interface CoffeeStore {
@@ -28,17 +30,17 @@ const CoffeeStorePage = () => {
                 setLoading(false);
             }
         };
-
         getCoffeeStores();
     }, []);
 
     return (
-        <div>
-            <h1>Coffee Stores</h1>
-            {loading && <p>Loading...</p>}
+        <div className="mt-60">
+            {loading &&
+                <Loading />
+            };
             {!loading && coffeeStores.length === 0 && <p>No coffee stores found.</p>}
-            <div className="coffee-store-list grid grid-cols-4 gap-4">
-                {coffeeStores.map((store) => (
+            <div className="flex flex-col md:grid grid-rows-2 grid-flow-col gap-2">
+                {coffeeStores.slice(0, 8).map((store) => (
                     <Card
                         key={store.fsq_id}
                         name={store.name}
@@ -49,7 +51,7 @@ const CoffeeStorePage = () => {
                     />
                 ))}
             </div>
-        </div>
+        </div >
     );
 };
 

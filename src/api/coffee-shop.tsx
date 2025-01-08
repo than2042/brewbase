@@ -8,17 +8,16 @@ const getCoffeeImage = async () => {
     });
 
     const photoResults = photos.response?.results || [];
-    const imageUrls = photoResults.map((result) => result.urls["small"]);
-
-    console.log("Unsplash image URLs:", imageUrls); // Debugging log
-
+    const desiredHeight = 300;
+    const imageUrls = photoResults.map((result) => {
+        const rawUrl = result.urls.raw; // Use raw URL for transformation
+        return `${rawUrl}&h=${desiredHeight}&fit=crop&q=80`; // Add height and fit parameters
+    });
     return imageUrls.length ? imageUrls : ["https://via.placeholder.com/150"];
 };
 
-
 export const fetchCoffeeShop = async () => {
     const images = await getCoffeeImage()
-    console.log(images)
 
     const options = {
         method: "GET",
@@ -27,7 +26,6 @@ export const fetchCoffeeShop = async () => {
             Authorization: process.env.NEXT_PUBLIC_FOURSQUARE_API || "",
         },
     };
-    console.log("Foursquare API Key:", process.env.FOURSQUARE_API);
 
     const response = await fetch(
         "https://api.foursquare.com/v3/places/search?query=coffee&ll=52.640889%2C1.1216884&limit=20", options
@@ -38,7 +36,6 @@ export const fetchCoffeeShop = async () => {
     }
 
     const data = await response.json();
-    console.log(data.results, 'data')
 
     return data.results.map((store: any, index: number) => ({
         ...store,
