@@ -1,10 +1,15 @@
 'use client'
 import { useState, useEffect } from "react";
-import { fetchCoffeeShop } from "@/api/coffee-shop";
+import { fetchCoffeeShop } from "@/app/api/coffee-store/route";
 import Card from "@/components/Card";
 import Loading from "@/app/loading";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-// define the TypeScript interface for coffee stores
+// Define the TypeScript interface for coffee stores
 interface CoffeeStore {
     fsq_id: string;
     name: string;
@@ -35,23 +40,36 @@ const CoffeeStorePage = () => {
 
     return (
         <div className="mt-60">
-            {loading &&
-                <Loading />
-            };
+            {loading && <Loading />}
             {!loading && coffeeStores.length === 0 && <p>No coffee stores found.</p>}
-            <div className="flex flex-col md:grid grid-rows-2 grid-flow-col gap-2">
-                {coffeeStores.slice(0, 8).map((store) => (
-                    <Card
-                        key={store.fsq_id}
-                        name={store.name}
-                        description={store.description || "No description available"}
-                        imageURL={store.photos}
-                        href={`/store/${store.fsq_id}`}
-                        fsq_id={store.fsq_id}
-                    />
-                ))}
-            </div>
-        </div >
+            {!loading && coffeeStores.length > 0 && (
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    navigation
+                    pagination={{ clickable: true }}
+                    spaceBetween={20}
+                    slidesPerView={4} // Adjust for the number of cards visible at once
+                    breakpoints={{
+                        320: { slidesPerView: 1 },
+                        640: { slidesPerView: 2 },
+                        768: { slidesPerView: 3 },
+                        1024: { slidesPerView: 4 },
+                    }}
+                >
+                    {coffeeStores.map((store) => (
+                        <SwiperSlide key={store.fsq_id}>
+                            <Card
+                                name={store.name}
+                                description={store.description || "No description available"}
+                                imageURL={store.photos}
+                                href={`/coffee-store/${store.fsq_id}`}
+                                fsq_id={store.fsq_id}
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            )}
+        </div>
     );
 };
 

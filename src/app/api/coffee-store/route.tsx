@@ -1,4 +1,4 @@
-import { unsplash } from "./unsplash";
+import { unsplash } from "../unsplash/route";
 
 const getCoffeeImage = async () => {
     const photos = await unsplash.search.getPhotos({
@@ -10,8 +10,8 @@ const getCoffeeImage = async () => {
     const photoResults = photos.response?.results || [];
     const desiredHeight = 300;
     const imageUrls = photoResults.map((result) => {
-        const rawUrl = result.urls.raw; // Use raw URL for transformation
-        return `${rawUrl}&h=${desiredHeight}&fit=crop&q=80`; // Add height and fit parameters
+        const rawUrl = result.urls.raw; // use raw URL for transformation
+        return `${rawUrl}&h=${desiredHeight}&fit=crop&q=80`; // add height and fit parameters
     });
     return imageUrls.length ? imageUrls : ["https://via.placeholder.com/150"];
 };

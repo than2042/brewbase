@@ -4,9 +4,9 @@ import Button from "./Button"
 const Banner: React.FC = () => {
 
     const handleClick = () => {
-        console.log('Click');
+        window.location.href = "/coffee-store";
+    };
 
-    }
     return (
         <div className="flex mt-[250px] md:ml-20 w-5/5 md:w-2/4 p-6 md:backdrop-brightness-200 md:opacity-45 flex-col justify-center items-center rounded-bl-[50px] md:skew-x-[20deg] saturate-200 translate-x-1 font-bold gap-6">
             <h1 className="text-coffee-dark text-7xl opacity-100"><span className="text-coffee">Brew </span>Base</h1>
