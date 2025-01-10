@@ -36,10 +36,10 @@ export const fetchCoffeeShop = async () => {
     }
 
     const data = await response.json();
+    console.log(data.results)
 
     return data.results.map((store: any, index: number) => ({
-        ...store,
-        fsq_id: store.fsq_id,
+        id: store.fsq_id,
         name: store.name,
         description: store.location?.formatted_address || "No description available",
         photos: images[index],

@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 
 // Define the TypeScript interface for coffee stores
 interface CoffeeStore {
-    fsq_id: string;
+    id: string;
     name: string;
     description: string;
     photos: string;
@@ -57,13 +57,13 @@ const CoffeeStorePage = () => {
                     }}
                 >
                     {coffeeStores.map((store) => (
-                        <SwiperSlide key={store.fsq_id}>
+                        <SwiperSlide key={store.id}>
                             <Card
                                 name={store.name}
                                 description={store.description || "No description available"}
                                 imageURL={store.photos}
-                                href={`/coffee-store/${store.fsq_id}`}
-                                fsq_id={store.fsq_id}
+                                href={`/coffee-store/${store.id}`}
+                                fsq_id={store.id}
                             />
                         </SwiperSlide>
                     ))}
