@@ -1,4 +1,4 @@
-import { unsplash } from "../unsplash/route";
+import { unsplash } from "../src/app/api/unsplash/route";
 
 const getCoffeeImage = async () => {
     const photos = await unsplash.search.getPhotos({

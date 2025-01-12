@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { fetchCoffeeShop } from "@/app/api/coffee-store/route";
+import { fetchCoffeeShop } from "../../../../utils/fetchCoffeeShop";
 
 interface CoffeeStore {
     id: string;
@@ -13,26 +13,30 @@ interface CoffeeStore {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query;
+    console.log("Request query:", req.query); // Debug
+    console.log("ID Type:", typeof id); // Debug
 
-    if (!id || Array.isArray(id)) {
-        return res.status(400).json({ error: "Invalid id parameter" });
+    const idString = Array.isArray(id) ? id[0] : id;
+
+    if (!idString) {
+        console.error("Missing ID");
+        return res.status(400).json({ message: "Missing coffee shop ID" });
     }
 
     try {
         const coffeeShops: CoffeeStore[] = await fetchCoffeeShop();
-        console.log("Fetched coffee shops:", coffeeShops); // Debug all coffee shops
+        console.log("Fetched coffee shops:", coffeeShops); // Debug
 
-        const coffeeStore = coffeeShops.find((store) => store.id === id.trim());
-        console.log("Coffee store with id:", id, coffeeStore); // Debug specific store
+        const coffeeShop = coffeeShops.find((shop) => shop.id === idString);
+        console.log("Filtered coffee shop:", coffeeShop); // Debug
 
-        if (!coffeeStore) {
-            return res.status(404).json({ error: "Coffee store not found" });
+        if (!coffeeShop) {
+            return res.status(404).json({ message: "Coffee shop not found" });
         }
 
-        res.status(200).json(coffeeStore);
-    } catch (error) {
-        console.error("Error fetching coffee store:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(200).json(coffeeShop);
+    } catch (error: any) {
+        console.error("Error fetching coffee shop:", error.message);
+        res.status(500).json({ message: "Internal server error" });
     }
 }
-
