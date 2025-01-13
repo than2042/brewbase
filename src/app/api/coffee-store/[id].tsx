@@ -13,8 +13,6 @@ interface CoffeeStore {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query;
-    console.log("Request query:", req.query); // Debug
-    console.log("ID Type:", typeof id); // Debug
 
     const idString = Array.isArray(id) ? id[0] : id;
 
