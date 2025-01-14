@@ -4,10 +4,12 @@ import { fetchCoffeeShop } from "../../../utils/fetchCoffeeShop";
 import Card from "@/components/Card";
 import Loading from "@/app/loading";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+// import 'swiper/css/navigation';
+// import 'swiper/css/pagination';
+import 'swiper/swiper-bundle.css';
+import styles from './coffee.module.css'
 
 // Define the TypeScript interface for coffee stores
 interface CoffeeStore {
@@ -39,21 +41,38 @@ const CoffeeStorePage = () => {
     }, []);
 
     return (
-        <div className="mt-60">
+        <div>
             {loading && <Loading />}
             {!loading && coffeeStores.length === 0 && <p>No coffee stores found.</p>}
             {!loading && coffeeStores.length > 0 && (
                 <Swiper
-                    modules={[Navigation, Pagination]}
+                    modules={[Navigation, Pagination, Autoplay]}
+                    className={styles.swiperWrapper}
                     navigation
                     pagination={{ clickable: true }}
                     spaceBetween={20}
-                    slidesPerView={4} // Adjust for the number of cards visible at once
+                    slidesPerView={4} // the number of cards visible at once
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    }}
                     breakpoints={{
-                        320: { slidesPerView: 1 },
-                        640: { slidesPerView: 2 },
-                        768: { slidesPerView: 3 },
-                        1024: { slidesPerView: 4 },
+                        320: {
+                            slidesPerView: 1,
+                            spaceBetween: 10,
+                        },
+                        640: {
+                            slidesPerView: 1,
+                            spaceBetween: 10,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                            spaceBetween: 15,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
+                        },
                     }}
                 >
                     {coffeeStores.map((store) => (
