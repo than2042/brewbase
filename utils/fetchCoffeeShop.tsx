@@ -4,7 +4,7 @@ const getCoffeeImage = async () => {
     const photos = await unsplash.search.getPhotos({
         query: "coffee shop",
         page: 1,
-        perPage: 20,
+        perPage: 30,
     });
 
     const photoResults = photos.response?.results || [];
