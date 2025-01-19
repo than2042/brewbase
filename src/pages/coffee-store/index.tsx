@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import { fetchCoffeeShop } from "../../../utils/fetchCoffeeShop";
+import { fetchCoffeeShop } from "@/utils/fetchCoffeeShop";
 import Card from "@/components/Card";
 import Loading from "@/app/loading";
 import { Swiper, SwiperSlide } from 'swiper/react';

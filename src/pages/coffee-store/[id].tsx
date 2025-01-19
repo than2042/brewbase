@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { fetchCoffeeShop } from "../../../utils/fetchCoffeeShop";
+import { fetchCoffeeShop } from "@/utils/fetchCoffeeShop";
 import Loading from "@/app/loading";
 
 interface CoffeeShop {
