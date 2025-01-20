@@ -41,8 +41,8 @@ const CoffeeShop = () => {
     return (
         <div className="flex justify-center gap-6 mt-40 mx-auto w-10/12 ">
             {coffeeStores.slice(0, 4).map((store) => (
-                <Link className="bg-slate-100 rounded" key={store.id} href={`/coffee-store/${store.id}`} id={store.id}>
-                    <h1 className="text-xl font-bold m-3">{store.name}</h1>
+                <Link className="bg-gradient-to-r from-blue-500 to-transparent rounded" key={store.id} href={`/coffee-store/${store.id}`} id={store.id}>
+                    <h1 className="text-xl font-bold m-3 text-white">{store.name}</h1>
                     <Image className="rounded" width={400} height={300} src={store.photos} alt={store.name} />
                 </Link>
 
