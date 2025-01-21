@@ -4,9 +4,6 @@ import { fetchCoffeeShop } from "@/utils/fetchCoffeeShop";
 import Link from "next/link";
 import Image from "next/image";
 
-
-// import Card from "./Card";
-
 interface CoffeeStore {
     id: string;
     name: string;
